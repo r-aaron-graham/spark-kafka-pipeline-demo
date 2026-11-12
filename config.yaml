@@ -1,0 +1,6 @@
+kafka:
+  bootstrap_servers: localhost:9092
+  topic: demo-topic
+sink:
+  path: output/events
+  checkpoint: output/checkpoint
