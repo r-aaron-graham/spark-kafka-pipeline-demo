@@ -1,12 +1,13 @@
+from pathlib import Path
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col, to_timestamp
-from pyspark.sql.types import StructType, IntegerType, DoubleType, TimestampType
+from pyspark.sql.types import StructType, IntegerType, DoubleType
 import yaml
 
-# Load config
-config = yaml.safe_load(open('config.yaml'))
-
 def main():
+    config_path = Path(__file__).resolve().parents[1] / "config.yaml"
+    config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     spark = SparkSession.builder.appName('SparkKafkaDemo').getOrCreate()
     schema = StructType() \
         .add('id', IntegerType()) \
